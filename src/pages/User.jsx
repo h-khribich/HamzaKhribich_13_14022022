@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Argent Bank - Home Page</title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <nav class="main-nav">
-      <a class="main-nav-logo" href="../../public/index.html">
-        <img
-          class="main-nav-logo-image"
-          src="./img/argentBankLogo.png"
-          alt="Argent Bank Logo"
-        />
-        <h1 class="sr-only">Argent Bank</h1>
-      </a>
-      <div>
-        <a class="main-nav-item" href="./user.html">
-          <i class="fa fa-user-circle"></i>
-          Tony
-        </a>
-        <a class="main-nav-item" href="../../public/index.html">
-          <i class="fa fa-sign-out"></i>
-          Sign Out
-        </a>
-      </div>
-    </nav>
+import React from "react";
+
+const User = () => {
+  return (
     <main class="main bg-dark">
       <div class="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
+        <h1>
+          Welcome back
+          <br />
+          Tony Jarvis!
+        </h1>
         <button class="edit-button">Edit Name</button>
       </div>
       <h2 class="sr-only">Accounts</h2>
@@ -68,8 +43,7 @@
         </div>
       </section>
     </main>
-    <footer class="footer">
-      <p class="footer-text">Copyright 2020 Argent Bank</p>
-    </footer>
-  </body>
-</html>
+  );
+};
+
+export default User;
