@@ -13,12 +13,19 @@ body {
   min-height: 100vh;
 }
 
+#root,
+.App {
+  min-height: 100vh;
+}
+
 .main {
   flex: 1;
 }
 
 .bg-dark {
   background-color: #12002b;
+  min-height: 75vh;
+  padding-top: 2rem;
 }
 
 .sr-only {

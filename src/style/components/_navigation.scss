@@ -17,10 +17,18 @@
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .main-nav-item:hover {
   text-decoration: underline;
+}
+
+.main-nav-item-user {
+  display: flex;
+  gap: 10px;
 }
 
 .main-nav-logo {
