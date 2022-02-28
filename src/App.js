@@ -12,9 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="sign-in" element={<SignIn />} />
-        <Route element={<ProtectedRoute isLoggedIn={true} />}>
-          <Route path="user" element={<User />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/user" element={<User />} />
         </Route>
       </Routes>
       <Footer />

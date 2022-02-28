@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { checkLogin } from "../app/apiCalls";
 import { useDispatch } from "react-redux";
-import { checkUser } from "../app/actionCreators";
-import { apiCall } from "../app/apiCall";
+import { loginUser } from "../app/features/authentification/auth.actions";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setUserEmail] = useState("");
   const [password, setUserPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
 
     if (email && password) {
@@ -17,9 +19,15 @@ const SignIn = () => {
         password,
       };
 
-      console.log(JSON.stringify(userData));
-      dispatch(checkUser(userData));
-      apiCall(userData);
+      const status = await checkLogin(userData);
+
+      if (status === 200) {
+        dispatch(loginUser());
+      }
+
+      navigate("/user");
+    } else {
+      // ALERT BOX TO FILL FIELDS
     }
   };
 
@@ -32,6 +40,7 @@ const SignIn = () => {
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input
+              required
               type="text"
               id="username"
               onChange={(e) => setUserEmail(e.target.value)}
@@ -40,6 +49,7 @@ const SignIn = () => {
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
+              required
               type="password"
               id="password"
               onChange={(e) => setUserPassword(e.target.value)}

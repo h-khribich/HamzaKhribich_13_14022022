@@ -1,11 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../app/features/authentification/auth.actions";
 
-// USE STATE WITH REDUX TO CHANGE DISPLAY DEPENDING ON LOGIN STATUS
-// USE STATE TO GET USER NAME
 const Header = () => {
-  // PLACERHOLDER VARIABLE
-  let loginStatus = false;
+  let loginStatus = useSelector((state) => state.auth === true);
+  let logout = useDispatch(logoutUser());
 
   return (
     <nav className="main-nav">
@@ -24,7 +25,7 @@ const Header = () => {
               <i className="fa fa-user-circle"></i>
               Tony
             </Link>
-            <Link className="main-nav-item" to="/">
+            <Link className="main-nav-item" to="/" onClick={logout}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </Link>
