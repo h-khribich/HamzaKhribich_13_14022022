@@ -16,6 +16,10 @@
   width: 300px;
   margin: 0 auto;
   padding: 2rem;
+
+  h1 {
+    margin-bottom: 0.4rem;
+  }
 }
 
 .sign-in-icon {
@@ -35,6 +39,7 @@
   flex-direction: column;
   text-align: left;
   margin-bottom: 1rem;
+  margin-top: 0.4rem;
 }
 
 .input-wrapper label {
@@ -44,4 +49,38 @@
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+}
+
+.form__invalid-message {
+  animation: shake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  color: rgb(153, 21, 21);
+  font-size: 0.8rem;
+  font-weight: bold;
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+}
+
+.hidden {
+  visibility: hidden;
 }

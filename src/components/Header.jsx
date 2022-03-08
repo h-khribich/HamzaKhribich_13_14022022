@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../app/features/authentification/auth.actions";
 
 const Header = () => {
-  let loginStatus = useSelector((state) => state.auth === true);
+  let loginStatus = useSelector((state) => state.login === true);
   let logout = useDispatch(logoutUser());
 
   return (

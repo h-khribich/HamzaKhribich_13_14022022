@@ -1,13 +1,29 @@
-import { LOGIN } from "./auth.actions";
+import { LOGIN, LOGIN_ERROR } from "./auth.actions";
 import { LOGOUT } from "./auth.actions";
 
-export const authReducer = (state = false, action) => {
+const initialState = {
+  token: null,
+  user: null,
+  login: false,
+  error: "",
+};
+
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      return (state = true);
+      return {
+        ...state,
+        token: action.payload.token,
+        user: action.payload.user,
+        login: action.payload.login,
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
     case LOGOUT:
-      return (state = false);
     default:
-      return state;
+      return initialState;
   }
 };

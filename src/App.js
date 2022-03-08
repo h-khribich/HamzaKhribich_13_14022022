@@ -5,6 +5,7 @@ import User from "./pages/User";
 import Homepage from "./pages/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import "animate.css";
 
 function App() {
   return (
