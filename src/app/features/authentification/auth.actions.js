@@ -2,8 +2,9 @@ import Axios from "axios";
 export const LOGIN = "LOGIN";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGOUT = "LOGOUT";
+export const EDIT_NAME = "EDIT_NAME";
 
-export const loginUser = (userData) => {
+export const loginUser = (userData, rememberMe) => {
   return async (dispatch) => {
     try {
       const response = await Axios.post(
@@ -11,6 +12,11 @@ export const loginUser = (userData) => {
         userData
       );
       const token = await response.data.body.token;
+
+      // Send user data to localStorage to keep login active
+      if (response.status === 200 && rememberMe) {
+        localStorage.setItem("userData", JSON.stringify(userData));
+      }
 
       // Fetch profile after login is validated
       const userProfile = await Axios.post(
@@ -46,5 +52,23 @@ export const loginUser = (userData) => {
 export const logoutUser = () => {
   return {
     type: LOGOUT,
+  };
+};
+
+export const EditName = (editedData, token) => {
+  return async (dispatch) => {
+    try {
+      await Axios.put("http://localhost:3001/api/v1/user/profile", editedData, {
+        headers: {
+          Authorization: "Bearer" + token,
+        },
+      });
+
+      dispatch({
+        type: EDIT_NAME,
+      });
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 };

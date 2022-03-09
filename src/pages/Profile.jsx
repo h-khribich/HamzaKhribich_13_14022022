@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { EditName } from "../app/features/authentification/auth.actions";
 
 const Profile = () => {
   // Using redux state to get user data
-  const userFirstName = useSelector((state) => state.user.firstName);
-  const userLastName = useSelector((state) => state.user.lastName);
+  const dataFirstName = useSelector((state) => state.user.firstName);
+  const dataLastName = useSelector((state) => state.user.lastName);
+  const [userFirstName, setUserFirstName] = useState(dataFirstName);
+  const [userLastName, setUserLastName] = useState(dataLastName);
+  const [editing, setEditing] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+
+  const handleEdit = () => {
+    const editedData = {
+      firstName: userFirstName,
+      lastName: userLastName,
+    };
+
+    dispatch(EditName(editedData, token));
+    setEditing(false);
+  };
 
   return (
     <main className="main bg-dark">
@@ -14,7 +31,29 @@ const Profile = () => {
           <br />
           {userFirstName} {userLastName}!
         </h1>
-        <button className="edit-button">Edit Name</button>
+        {editing ? (
+          <div className="edit-group">
+            <label htmlFor="firstname">Firstname</label>
+            <input
+              id="firstname"
+              defaultValue={userFirstName}
+              onChange={(e) => setUserFirstName(e.target.value)}
+            ></input>
+            <label htmlFor="lastname">Lastname</label>
+            <input
+              id="lastname"
+              defaultValue={userLastName}
+              onChange={(e) => setUserLastName(e.target.value)}
+            ></input>
+            <button className="edit-button" onClick={() => handleEdit()}>
+              Edit
+            </button>
+          </div>
+        ) : (
+          <button className="edit-button" onClick={() => setEditing(true)}>
+            Edit Name
+          </button>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <div className="account-sections-wrapper">

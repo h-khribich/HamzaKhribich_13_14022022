@@ -1,5 +1,4 @@
-import { LOGIN, LOGIN_ERROR } from "./auth.actions";
-import { LOGOUT } from "./auth.actions";
+import { LOGIN, LOGIN_ERROR, LOGOUT, EDIT_NAME } from "./auth.actions";
 
 const initialState = {
   token: null,
@@ -22,6 +21,10 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload.error,
+      };
+    case EDIT_NAME:
+      return {
+        ...state,
       };
     case LOGOUT:
     default:

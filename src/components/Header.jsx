@@ -12,9 +12,7 @@ const Header = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
     // Should the 'Remember me' data be true, clear all on logout
-    if (userData) {
-      localStorage.removeItem("userData");
-    }
+    userData && localStorage.removeItem("userData");
 
     return dispatch(logoutUser());
   };
