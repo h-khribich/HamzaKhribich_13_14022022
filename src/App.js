@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "../src/components/ProtectedRoute";
-import SignIn from "./pages/SignIn";
-import User from "./pages/User";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import Homepage from "./pages/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -13,9 +13,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/user" element={<User />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
       <Footer />

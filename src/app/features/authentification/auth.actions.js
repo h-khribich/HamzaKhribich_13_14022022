@@ -12,6 +12,7 @@ export const loginUser = (userData) => {
       );
       const token = await response.data.body.token;
 
+      // Fetch profile after login is validated
       const userProfile = await Axios.post(
         "http://localhost:3001/api/v1/user/profile",
         {},
@@ -31,6 +32,7 @@ export const loginUser = (userData) => {
         },
       });
     } catch (error) {
+      // Error message returned by API is displayed to user
       dispatch({
         type: LOGIN_ERROR,
         payload: {

@@ -1,12 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logoutUser } from "../app/features/authentification/auth.actions";
 
 const Header = () => {
-  let loginStatus = useSelector((state) => state.login === true);
-  let logout = useDispatch(logoutUser());
+  const loginStatus = useSelector((state) => state.login);
+  const userData = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <nav className="main-nav">
@@ -21,17 +25,17 @@ const Header = () => {
       <div>
         {loginStatus ? (
           <div className="main-nav-item-user">
-            <Link className="main-nav-item" to="user">
+            <Link className="main-nav-item" to="profile">
               <i className="fa fa-user-circle"></i>
-              Tony
+              {userData.firstName}
             </Link>
-            <Link className="main-nav-item" to="/" onClick={logout}>
+            <Link className="main-nav-item" to="/" onClick={() => logout()}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </Link>
           </div>
         ) : (
-          <Link className="main-nav-item" to="sign-in">
+          <Link className="main-nav-item" to="login">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>

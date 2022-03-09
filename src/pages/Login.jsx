@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../app/features/authentification/auth.actions";
 
-const SignIn = () => {
+const Login = () => {
   const [email, setUserEmail] = useState("");
   const [password, setUserPassword] = useState("");
   const [invalidMsg, setInvalidMsg] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const login = useSelector((state) => state.login);
@@ -31,7 +32,7 @@ const SignIn = () => {
     }
   };
 
-  const handleForm = async (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
 
     // Both user inputs in one object to be used as arg in dispatch
@@ -46,7 +47,7 @@ const SignIn = () => {
   // Redirect user depending on login status
   useEffect(() => {
     if (login === true) {
-      navigate("/user");
+      navigate("/profile");
     } else {
       setInvalidMsg(error);
     }
@@ -86,7 +87,11 @@ const SignIn = () => {
             />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              onClick={() => setRememberMe(!rememberMe)}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className="sign-in-button">Sign In</button>
@@ -96,4 +101,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

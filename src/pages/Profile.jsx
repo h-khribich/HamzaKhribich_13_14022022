@@ -1,13 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const User = () => {
+const Profile = () => {
+  // Using redux state to get user data
+  const userFirstName = useSelector((state) => state.user.firstName);
+  const userLastName = useSelector((state) => state.user.lastName);
+
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {userFirstName} {userLastName}!
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
@@ -48,4 +53,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Profile;
