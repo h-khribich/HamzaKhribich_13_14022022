@@ -41,6 +41,13 @@ const Login = () => {
       password,
     };
 
+    // Remember user feature with localStorage
+    if (rememberMe) {
+      localStorage.setItem("userData", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("userData");
+    }
+
     dispatch(loginUser(userData));
   };
 

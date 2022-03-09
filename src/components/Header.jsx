@@ -9,7 +9,14 @@ const Header = () => {
   const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(logoutUser());
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    // Should the 'Remember me' data be true, clear all on logout
+    if (userData) {
+      localStorage.removeItem("userData");
+    }
+
+    return dispatch(logoutUser());
   };
 
   return (
