@@ -19,7 +19,7 @@ export const loginUser = (userData, rememberMe) => {
       }
 
       // Fetch profile after login is validated
-      const userProfile = await Axios.post(
+      const userProfile = await Axios.get(
         "http://localhost:3001/api/v1/user/profile",
         {},
         {
@@ -42,7 +42,7 @@ export const loginUser = (userData, rememberMe) => {
       dispatch({
         type: LOGIN_ERROR,
         payload: {
-          error: error.response.data.message,
+          error: "Username and/or password are invalid",
         },
       });
     }
@@ -58,14 +58,21 @@ export const logoutUser = () => {
 export const EditName = (editedData, token) => {
   return async (dispatch) => {
     try {
-      await Axios.put("http://localhost:3001/api/v1/user/profile", editedData, {
-        headers: {
-          Authorization: "Bearer" + token,
-        },
-      });
+      const response = await Axios.patch(
+        "http://localhost:3001/api/v1/user/profile",
+        editedData,
+        {
+          headers: {
+            Authorization: "Bearer" + token,
+          },
+        }
+      );
 
       dispatch({
         type: EDIT_NAME,
+        payload: {
+          user: response.data.body,
+        },
       });
     } catch (err) {
       console.log(err.response);

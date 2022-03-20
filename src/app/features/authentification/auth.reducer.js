@@ -25,6 +25,7 @@ export const authReducer = (state = initialState, action) => {
     case EDIT_NAME:
       return {
         ...state,
+        user: action.payload.user,
       };
     case LOGOUT:
     default:

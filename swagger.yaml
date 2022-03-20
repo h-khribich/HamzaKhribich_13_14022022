@@ -13,7 +13,7 @@ schemes:
   - "http"
 paths:
   /transactions:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -37,7 +37,8 @@ paths:
           description: No Transaction Found
         "500":
           description: Internal Server Error
-    put:
+  /transaction/:id:
+    patch:
       security:
         - Bearer: []
       tags:
@@ -104,6 +105,16 @@ definitions:
   EditTransaction:
     type: object
     properties:
+      id:
+        type: number
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      balance:
+        type: number
       transaction type:
         type: string
       category:
